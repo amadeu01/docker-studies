@@ -16,6 +16,7 @@ RUN apt-get install -y nginx
 RUN mkdir -p /run/nginx
 	# Libs required for geospatial libraries on Debian...
 RUN apt-get -y install binutils libproj-dev gdal-bin
+	
 	##############################################################################
 	# A Few pip installs not commonly in requirements.txt
 	##############################################################################
@@ -39,14 +40,3 @@ RUN mkdir -p /var/run/agile/ && chown -R agile /var/run/agile/ && chmod -R u+rX 
 
 RUN apt-get install -y supervisor
 RUN mkdir -p /var/log/supervisor
-
-	##############################################################################
-	# Install dependencies and run scripts.
-	##############################################################################
-
-WORKDIR /var/projects/
-COPY start.sh / 
-
-EXPOSE 8000
-
-CMD ["sh", "start.sh"]
